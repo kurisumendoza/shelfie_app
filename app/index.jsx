@@ -19,11 +19,11 @@ const Home = () => {
       <ThemedText>Reading List App</ThemedText>
       <Spacer />
 
-      <Link href="/about" style={styles.link}>
-        <ThemedText>About Page</ThemedText>
+      <Link href="/login" style={styles.link}>
+        <ThemedText>Login Page</ThemedText>
       </Link>
-      <Link href="/contact" style={styles.link}>
-        <ThemedText>Contact Page</ThemedText>
+      <Link href="/register" style={styles.link}>
+        <ThemedText>Register Page</ThemedText>
       </Link>
     </ThemedView>
   );
@@ -32,19 +32,7 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  title: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-
-  link: {
-    marginVertical: 10,
-    borderBottomWidth: 1,
-  },
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  title: { fontWeight: 'bold', fontSize: 18 },
+  link: { marginVertical: 10, borderBottomWidth: 1 },
 });
