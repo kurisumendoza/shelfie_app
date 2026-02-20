@@ -1,6 +1,5 @@
-import { StyleSheet, useColorScheme } from 'react-native';
+import { StyleSheet, useColorScheme, StatusBar } from 'react-native';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
 
 import { Colors } from '../constants/Colors';
 
@@ -18,8 +17,6 @@ const RootLayout = () => {
         }}
       >
         <Stack.Screen name="index" options={{ title: 'Home' }} />
-        <Stack.Screen name="about" options={{ title: 'About' }} />
-        <Stack.Screen name="contact" options={{ title: 'Contact' }} />
       </Stack>
     </>
   );
