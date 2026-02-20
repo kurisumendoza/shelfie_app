@@ -1,4 +1,4 @@
-import { StyleSheet, useColorScheme, StatusBar } from 'react-native';
+import { useColorScheme, StatusBar } from 'react-native';
 import { Stack } from 'expo-router';
 
 import { Colors } from '../constants/Colors';
@@ -16,6 +16,7 @@ const RootLayout = () => {
           headerTintColor: theme.title,
         }}
       >
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ title: 'Home' }} />
       </Stack>
     </>
@@ -23,5 +24,3 @@ const RootLayout = () => {
 };
 
 export default RootLayout;
-
-const styles = StyleSheet.create({});
