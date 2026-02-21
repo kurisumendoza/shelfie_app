@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { ID, Permission, Query, Role } from 'react-native-appwrite';
-import { tablesDB } from '../lib/appwrite';
+import { tablesDB, client } from '../lib/appwrite';
 import { useUser } from '../hooks/useUser';
 
 const DATABASE_ID = '69995678003a0ec88eb4';
@@ -60,11 +60,29 @@ export function BooksProvider({ children }) {
   }
 
   useEffect(() => {
-    if (user) {
-      fetchBooks();
-    } else {
+    let unsubscribe;
+
+    if (!user) {
       setBooks([]);
+      return;
     }
+
+    fetchBooks();
+
+    const channel = `databases.${DATABASE_ID}.tables.${TABLE_ID}.rows`;
+
+    unsubscribe = client.subscribe(channel, (response) => {
+      const row = response.payload;
+      const event = response.events[0];
+
+      if (event.includes('create')) {
+        setBooks((prev) => [...prev, row]);
+      }
+    });
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, [user]);
 
   return (
