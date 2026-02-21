@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react';
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
   async function login(email, password) {}
 

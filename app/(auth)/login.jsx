@@ -1,6 +1,13 @@
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback } from 'react-native';
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import { Link } from 'expo-router';
+
+import { useUser } from '../../hooks/useUser';
 
 import Spacer from '../../components/Spacer';
 import ThemedView from '../../components/ThemedView';
@@ -12,8 +19,11 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { user } = useUser();
+
   const handleSubmit = () => {
     console.log('email:', email, 'password:', password);
+    console.log('user:', user);
   };
 
   return (
