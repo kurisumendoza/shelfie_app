@@ -60,6 +60,11 @@ export function BooksProvider({ children }) {
 
   async function deleteBook(id) {
     try {
+      await tablesDB.deleteRow({
+        databaseId: DATABASE_ID,
+        tableId: TABLE_ID,
+        rowId: id,
+      });
     } catch (error) {
       console.error(error.message);
     }
@@ -83,6 +88,10 @@ export function BooksProvider({ children }) {
 
       if (event.includes('create')) {
         setBooks((prev) => [...prev, row]);
+      }
+
+      if (event.includes('delete')) {
+        setBooks((prev) => prev.filter((book) => book.$id !== row.$id));
       }
     });
 
