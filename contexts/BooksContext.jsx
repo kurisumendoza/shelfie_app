@@ -21,7 +21,6 @@ export function BooksProvider({ children }) {
       });
 
       setBooks(response.rows);
-      console.log(response.rows);
     } catch (error) {
       console.error(error.message);
     }
@@ -29,6 +28,13 @@ export function BooksProvider({ children }) {
 
   async function fetchBookById(id) {
     try {
+      const response = await tablesDB.getRow({
+        databaseId: DATABASE_ID,
+        tableId: TABLE_ID,
+        rowId: id,
+      });
+
+      return response;
     } catch (error) {
       console.error(error.message);
     }
