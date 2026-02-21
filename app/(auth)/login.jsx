@@ -19,11 +19,12 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user } = useUser();
+  const { login } = useUser();
 
-  const handleSubmit = () => {
-    console.log('email:', email, 'password:', password);
-    console.log('user:', user);
+  const handleSubmit = async () => {
+    try {
+      await login(email, password);
+    } catch (error) {}
   };
 
   return (
