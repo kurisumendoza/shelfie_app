@@ -1,11 +1,16 @@
 import { createContext, useState } from 'react';
+import { ID, Permission, Role } from 'react-native-appwrite';
+import { tablesDB } from '../lib/appwrite';
+import { useUser } from '../hooks/useUser';
 
 const DATABASE_ID = '69995678003a0ec88eb4';
+const TABLE_ID = 'books';
 
 export const BooksContext = createContext();
 
 export function BooksProvider({ children }) {
   const [books, setBooks] = useState([]);
+  const { user } = useUser();
 
   async function fetchBooks() {
     try {
@@ -23,6 +28,17 @@ export function BooksProvider({ children }) {
 
   async function createBook(data) {
     try {
+      const newBook = await tablesDB.createRow({
+        databaseId: DATABASE_ID,
+        tableId: TABLE_ID,
+        rowId: ID.unique(),
+        data: { ...data, userId: user.$id },
+        permissions: [
+          Permission.read(Role.user(user.$id)),
+          Permission.update(Role.user(user.$id)),
+          Permission.delete(Role.user(user.$id)),
+        ],
+      });
     } catch (error) {
       console.error(error.message);
     }
